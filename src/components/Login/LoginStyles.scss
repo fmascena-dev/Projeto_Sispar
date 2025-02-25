@@ -1,8 +1,16 @@
+$border-color-default: #cbd4e1;
+$border-color-hover: var(--color-seven);
+$border-color-focus: var(--color-one);
+$border-color-error: #ff0000;
+$box-shadow-focus: 1px 1px 10px -2px var(--color-eight);
+$box-shadow-hover-primary: 1px 1px 10px 2px var(--color-one);
+$box-shadow-hover-secondary: 1px 1px 10px 2px var(--color-three);
+
 .login__home {
   display: flex;
   align-items: center;
   gap: 4rem;
-  height: 100vh;
+  width: 100%;
 }
 
 .imagem__inicial {
@@ -10,7 +18,6 @@
   height: 100vh;
 
   img {
-    position: relative;
     width: 100%;
     height: 100vh;
     object-fit: cover;
@@ -22,7 +29,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  flex: 0.5;
+  flex: 0.55;
   gap: 0.5rem;
 
   img {
@@ -45,6 +52,7 @@
     h3 {
       color: var(--text-secondary-color);
       font-size: 1rem;
+      font-weight: 700;
       margin-bottom: 1rem;
     }
 
@@ -57,19 +65,28 @@
       input {
         width: 100%;
         padding: 0.65rem;
-        border: 1px solid #cbd4e1;
+        border: 1px solid $border-color-default;
         border-radius: 6px;
         outline: none;
         font-size: 1rem;
         margin-bottom: 1rem;
 
         &:hover {
-          border: 1px solid var(--color-seven);
+          border: 1px solid $border-color-hover;
         }
 
         &:focus {
-          border: 1px solid var(--color-one);
-          box-shadow: 1px 1px 10px -2px var(--color-eight);
+          border: 1px solid $border-color-focus;
+          box-shadow: $box-shadow-focus;
+        }
+
+        &.error {
+          border: 1px solid $border-color-error;
+
+          &:hover,
+          &:focus {
+            border: 1px solid $border-color-error;
+          }
         }
       }
 
@@ -82,20 +99,8 @@
         }
       }
 
-      .error {
-        border: 1px solid #FF0000;
-
-        &:focus {
-          border: 1px solid #FF0000;
-        }
-
-        &:hover {
-          border: 1px solid #FF0000;
-        }
-      }
-
       .error-message {
-        color: #FF0000;
+        color: $border-color-error;
         font-size: 1rem;
         margin-top: 10px;
         text-transform: uppercase;
@@ -122,7 +127,7 @@
       cursor: pointer;
 
       &:hover {
-        box-shadow: 1px 1px 10px 2px var(--color-one);
+        box-shadow: $box-shadow-hover-primary;
       }
     }
 
@@ -138,7 +143,7 @@
       cursor: pointer;
 
       &:hover {
-        box-shadow: 1px 1px 10px 2px var(--color-three);
+        box-shadow: $box-shadow-hover-secondary;
       }
     }
   }
