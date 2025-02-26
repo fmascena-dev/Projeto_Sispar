@@ -44,7 +44,7 @@ export default function Login() {
   };
 
   return (
-    <section className="login__home">
+    <section path='login' className="login__home">
       <div className="imagem__inicial">
         <img src={ImgPrincipal} alt="Imagem de um Navio" />
       </div>
