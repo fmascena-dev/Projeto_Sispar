@@ -13,12 +13,12 @@
   transition: width 0.4s ease-in-out;
 
   &:hover {
-    width: 180px;
-    box-shadow: 1px 1px 10px 1px #cccccc;
+    width: 190px;
+    box-shadow: 1px 1px 10px 1px #242424;
 
     .navbar__links li {
     //   justify-content: start;
-      margin-left: -30px;
+      margin-left: -25px;
     }
 
     .navbar__links p {
@@ -93,7 +93,7 @@
 .navbar__links {
   ul {
     list-style: none;
-    padding: 0;
+    // padding: 0;
 }
 
 li {
@@ -102,7 +102,7 @@ li {
     justify-content: start;
     gap: 12px;
     margin-bottom: 1rem;
-    margin-left: 90px;
+    margin-left: 105px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 
