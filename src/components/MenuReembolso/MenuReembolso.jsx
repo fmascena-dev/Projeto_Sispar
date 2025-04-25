@@ -5,10 +5,13 @@ import { GoHome } from 'react-icons/go';
 import { IoIosArrowForward, IoIosList, IoMdClose } from 'react-icons/io';
 import { IoCloudDoneOutline } from 'react-icons/io5';
 import { VscHistory } from 'react-icons/vsc';
+import NavBar from '../NavBar/NavBar';
+import { Link } from 'react-router-dom';
 
 export default function MenuReembolso() {
   return (
     <section className="menu__reembolso">
+      <NavBar />
       <div className="header__reembolso">
         <GoHome />
         <span>
@@ -17,7 +20,7 @@ export default function MenuReembolso() {
         <p>Reembolsos</p>
       </div>
 
-      <section className='main__reembolso'>
+      <section className="main__reembolso">
         <div className="title__reembolso">
           <h1>Sistema de Reembolsos</h1>
           <p>
@@ -27,15 +30,17 @@ export default function MenuReembolso() {
         </div>
 
         <div className="options__reembolso">
-          <a href="#">
+          <Link to="/solicitacao">
             <img src="/reembolso1.svg" alt="ícone de uma pasta" />
             <p>Solicitar Reembolso</p>
-          </a>
+          </Link>
+
           <a href="#">
             <IoIosList />
             <p>Visualizar análises</p>
           </a>
-          <a href="#" className='history'>
+          
+          <a href="#" className="history">
             <VscHistory />
             <p>Histórico</p>
           </a>
@@ -45,20 +50,21 @@ export default function MenuReembolso() {
           <ul>
             <li>
               {' '}
-              <FiCornerUpLeft className='arrow' /> <span>182</span> Solicitados
+              <FiCornerUpLeft className="arrow" /> <span>182</span> Solicitados
             </li>
             <li>
               {' '}
-              <AiOutlineClockCircle className='time' /> <span>74</span> Em análise
+              <AiOutlineClockCircle className="time" /> <span>74</span> Em
+              análise
             </li>
             <li>
               {' '}
-              <img src="/check.svg" alt="" className='check'/>
+              <img src="/check.svg" alt="" className="check" />
               <span>195</span> Aprovados
             </li>
             <li>
               {' '}
-              <IoMdClose className='reject' />
+              <IoMdClose className="reject" />
               <span>41</span> Rejeitados
             </li>
           </ul>

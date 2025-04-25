@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginStyles.scss';
 import ImgPrincipal from '../../images/img-initial.png';
 
@@ -9,8 +10,20 @@ export default function Login() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
+  const navigate = useNavigate();
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
   const handleLogin = () => {
     let valid = true;
+
     if (!validateEmail(email)) {
       setEmailError(true);
       setErrorMessage('Email inválido.');
@@ -28,35 +41,33 @@ export default function Login() {
     }
 
     if (valid) {
-      // Processar login...
       setErrorMessage('');
-      alert('Login bem-sucedido!');
+      // Aqui você pode redirecionar para a página de reembolsos
+      navigate('/reembolsos');
     }
   };
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    return password.length >= 8;
-  };
-
   return (
-    <section path='login' className="login__home">
-      <div className="imagem__inicial">
+    <main className="login__home">
+      <section className="imagem__inicial">
         <img src={ImgPrincipal} alt="Imagem de um Navio" />
-      </div>
+      </section>
 
-      <div className="login__principal">
-        <img src="/logo_sispar.svg" alt="Logo da Sispar" />
-
+      <section className="login__principal">
         <div className="login__text-form">
+          <img src="/logo_sispar.svg" alt="Logo da wilson sons" />
           <h1>Boas vindas ao Novo Portal SISPAR</h1>
           <h3>Sistema de Emissão de Boletos e Parcelamento</h3>
 
-          <form className="login__form" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="login__form"
+            onSubmit={(e) => e.preventDefault()}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleLogin();
+              }
+            }}
+          >
             <input
               type="email"
               placeholder="Email"
@@ -76,15 +87,15 @@ export default function Login() {
             <a href="#">Esqueci minha senha</a>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
           </form>
-        </div>
 
-        <div className="btns__login">
-          <button className="btn__primary" onClick={handleLogin}>
-            Entrar
-          </button>
-          <button className="btn__secondary">Criar conta</button>
+          <div className="btns__login">
+            <button className="btn__primary" onClick={handleLogin}>
+              Entrar
+            </button>
+            <button className="btn__secondary">Criar conta</button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
   );
 }

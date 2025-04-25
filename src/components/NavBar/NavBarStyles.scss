@@ -10,16 +10,11 @@
   justify-content: space-between;
   background-color: #ffffff;
   z-index: 100;
-  transition: width 0.4s ease-in-out;
+  transition: width 0.3s ease-in-out;
 
   &:hover {
-    width: 190px;
-    box-shadow: 1px 1px 10px 1px #242424;
-
-    .navbar__links li {
-    //   justify-content: start;
-      margin-left: -25px;
-    }
+    width: 200px;
+    box-shadow: 1px 1px 10px 1px #777777;
 
     .navbar__links p {
       opacity: 1;
@@ -36,6 +31,8 @@
 
 .navbar__menu {
   display: flex;
+  flex-direction: column;
+  gap: 4rem;
 
   svg {
     width: 40px;
@@ -46,13 +43,6 @@
     padding: 0.5rem;
     cursor: pointer;
   }
-}
-
-.navbar__user {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
 
   .user {
     display: flex;
@@ -71,67 +61,72 @@
     }
 
     h2 {
-        color: var(--color-eight);
-        font-size: 1.5rem;
+      color: var(--color-eight);
+      font-size: 1.5rem;
     }
 
     p {
-        color: var(--color-two);
-        font-weight: 700;
+      color: var(--color-two);
+      font-weight: 700;
     }
 
     h2,
     p {
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+      transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
       white-space: nowrap;
     }
   }
 }
 
-.navbar__links {
-  ul {
-    list-style: none;
-    // padding: 0;
-}
+.navbar__user {
+  display: flex;
+  flex-direction: column;
 
-li {
-      display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 12px;
-    margin-bottom: 1rem;
-    margin-left: 105px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
+  .navbar__links {
+    display: flex;
 
-    &:hover {
-      transform: scale(1.05);
-    }
+    ul {
+      list-style: none;
 
-    svg {
-      width: 40px;
-      height: 40px;
-      color: #fff;
-      background-color: var(--color-two);
-      border-radius: 0.25rem;
-      padding: 0.4rem;
-      cursor: pointer;
-    }
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 12px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
 
-    a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      color: var(--color-eight);
+        a p {
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+          white-space: nowrap;
+          font-weight: 600;
+        }
 
-      p {
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-        white-space: nowrap;
-        font-weight: 700;
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        svg {
+          width: 40px;
+          height: 40px;
+          color: #fff;
+          background-color: var(--color-two);
+          border-radius: 0.25rem;
+          padding: 0.4rem;
+          cursor: pointer;
+        }
+
+        a {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          color: var(--color-eight);
+        }
       }
     }
   }

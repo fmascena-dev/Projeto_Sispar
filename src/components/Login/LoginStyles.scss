@@ -9,14 +9,13 @@ $box-shadow-hover-secondary: 1px 1px 10px 2px var(--color-three);
 .login__home {
   display: flex;
   align-items: center;
-  gap: 4rem;
   width: 100%;
+  height: 100vh;
 }
 
 .imagem__inicial {
   flex: 1;
-  height: 100vh;
-
+  
   img {
     width: 100%;
     height: 100vh;
@@ -29,12 +28,8 @@ $box-shadow-hover-secondary: 1px 1px 10px 2px var(--color-three);
   flex-direction: column;
   align-items: center;
   text-align: center;
-  flex: 0.55;
+  flex: 0.6;
   gap: 0.5rem;
-
-  img {
-    width: 30%;
-  }
 
   .login__text-form {
     display: flex;
@@ -61,7 +56,7 @@ $box-shadow-hover-secondary: 1px 1px 10px 2px var(--color-three);
       flex-direction: column;
       gap: 0.5rem;
       width: 100%;
-
+      
       input {
         width: 100%;
         padding: 0.65rem;
@@ -70,19 +65,19 @@ $box-shadow-hover-secondary: 1px 1px 10px 2px var(--color-three);
         outline: none;
         font-size: 1rem;
         margin-bottom: 1rem;
-
+        
         &:hover {
           border: 1px solid $border-color-hover;
         }
-
+        
         &:focus {
           border: 1px solid $border-color-focus;
           box-shadow: $box-shadow-focus;
         }
-
+        
         &.error {
           border: 1px solid $border-color-error;
-
+          
           &:hover,
           &:focus {
             border: 1px solid $border-color-error;
@@ -93,12 +88,13 @@ $box-shadow-hover-secondary: 1px 1px 10px 2px var(--color-three);
       a {
         text-decoration: none;
         color: var(--text-primary-color);
-
+        margin-bottom: 1rem;
+        
         &:hover {
           text-decoration: underline;
         }
       }
-
+      
       .error-message {
         color: $border-color-error;
         font-size: 1rem;
