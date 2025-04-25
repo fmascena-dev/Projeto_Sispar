@@ -37,13 +37,13 @@ export default function NavBar() {
           <ul>
             <li>
               <GoHome />
-              <a href="">
+              <a href="/">
                 <p>Início</p>
               </a>
             </li>
             <li>
               <TbFileDollar />
-              <a href="">
+              <a href="/reembolsos">
                 <p>Reembolsos</p>
               </a>
             </li>
