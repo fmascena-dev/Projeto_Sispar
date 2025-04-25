@@ -222,8 +222,8 @@ export default function SolicitarReembolso() {
                 <th>Colaborador(a)</th>
                 <th>Empresa</th>
                 <th>Nº Prest.</th>
-                <th>Data</th>
                 <th>Motivo</th>
+                <th>Data</th>
                 <th>Tipo de despesa</th>
                 <th>Ctr. Custo</th>
                 <th>Ord. Int.</th>
