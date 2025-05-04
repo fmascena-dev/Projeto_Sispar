@@ -5,70 +5,88 @@ import NavBar from '../NavBar/NavBar';
 import { FiDelete } from 'react-icons/fi';
 // import TabelaReembolsos from '../Tabela/TabelaReembolsos';
 import { useState } from 'react';
+import api from '../../Api/Api'
 
 export default function SolicitarReembolso() {
   const [tableData, setTableData] = useState([]);
 
   const handleSalvar = () => {
-    const nome = document.getElementById('nome')?.value || '';
+    const colaborador = document.getElementById('colaborador')?.value || '';
     const empresa = document.getElementById('empresa')?.value || '';
-    const prestacao = document.getElementById('prestacao')?.value || '';
-    const motivo = document.getElementById('motivo')?.value || '';
+    const num_prestacao = document.getElementById('num_prestacao')?.value || '';
+    const descricao = document.getElementById('descricao')?.value || '';
     const data = document.getElementById('data')?.value || '';
-    const tipoDespesa = document.getElementById('tipo-despesa')?.value || '';
-    const centroCusto = document.getElementById('centro-custo')?.value || '';
-    const ordemInterna = document.getElementById('ordem-interna')?.value || '';
+    const tipo_reembolso = document.getElementById('tipo_despesa')?.value || '';
+    const centro_custo = document.getElementById('centro_custo')?.value || '';
+    const ordem_interna = document.getElementById('ordem_interna')?.value || '';
     const divisao = document.getElementById('divisao')?.value || '';
     const pep = document.getElementById('pep')?.value || '';
     const moeda = document.getElementById('moeda')?.value || '';
-    const distKm = document.getElementById('dist-km')?.value || '';
-    const valorKm = document.getElementById('valor-km')?.value || '';
-    const valorFaturado =
-      document.getElementById('valor-faturado')?.value || '';
-    const valorDespesa = document.getElementById('valor-despesa')?.value || '';
+    const distancia_km = document.getElementById('distancia_km')?.value || '';
+    const valor_km = document.getElementById('valor_km')?.value || '';
+    const valor_faturado =
+      document.getElementById('valor_faturado')?.value || '';
+    const despesa = document.getElementById('valor_despesa')?.value || '';
 
     const newRow = {
-      nome,
+      colaborador,
       empresa,
-      prestacao,
-      motivo,
+      num_prestacao,
+      descricao,
       data,
-      tipoDespesa,
-      centroCusto,
-      ordemInterna,
+      tipo_reembolso,
+      centro_custo,
+      ordem_interna,
       divisao,
       pep,
       moeda,
-      distKm,
-      valorKm,
-      valorFaturado,
-      valorDespesa,
+      distancia_km,
+      valor_km,
+      valor_faturado,
+      despesa,
     };
 
     setTableData((prev) => [...prev, newRow]);
 
     // limpa os campos
     [
-      'nome',
+      'colaborador',
       'empresa',
-      'prestacao',
+      'num_prestacao',
       'data',
-      'tipo-despesa',
-      'centro-custo',
-      'motivo',
-      'ordem-interna',
+      'tipo_despesa',
+      'centro_custo',
+      'descricao',
+      'ordem_interna',
       'divisao',
       'pep',
       'moeda',
-      'dist-km',
-      'valor-km',
-      'valor-faturado',
-      'valor-despesa',
+      'distancia_km',
+      'valor_km',
+      'valor_faturado',
+      'valor_despesa',
     ].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.value = '';
     });
   };
+
+  const handleEnviarParaAnalise = async () => {
+    try {
+      const response = await api.post('/reembolso/reembolsos', tableData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('Dados enviados com sucesso:', response.data);
+      alert('Solicitação enviada com sucesso!');
+      setTableData([]); // limpa a tabela depois de enviar, se quiser
+    } catch (error) {
+      console.error('Erro ao enviar dados:', error);
+      alert('Erro ao enviar solicitação. Verifique a conexão com o servidor.');
+    }
+  };
+
 
   return (
     <>
@@ -94,7 +112,7 @@ export default function SolicitarReembolso() {
             <div className="linha__inputs">
               <div className="primary__input__name">
                 <label htmlFor="">Nome Completo:</label>
-                <input id="nome" type="text" />
+                <input id="colaborador" type="text" />
               </div>
               <div className="primary__inputs">
                 <label htmlFor="">Empresa:</label>
@@ -102,13 +120,13 @@ export default function SolicitarReembolso() {
               </div>
               <div className="primary__inputs">
                 <label htmlFor="">Nº Prest. Contas:</label>
-                <input id="prestacao" type="number" />
+                <input id="num_prestacao" type="number" />
               </div>
             </div>
 
             <div className="primary__inputs">
               <label htmlFor="">Descrição / Motivo do Reembolso:</label>
-              <textarea id="motivo" />
+              <textarea id="descricao" />
             </div>
           </div>
 
@@ -123,7 +141,7 @@ export default function SolicitarReembolso() {
 
               <div className="inputs__entradas">
                 <label htmlFor="">Tipo de Despesa</label>
-                <select id="tipo-despesa">
+                <select id="tipo_despesa">
                   <option value="">Selecionar</option>
                   <option value="Alimentacao"> Alimentação </option>
                   <option value="Combustivel"> Combustível</option>
@@ -137,7 +155,7 @@ export default function SolicitarReembolso() {
 
               <div className="inputs__entradas">
                 <label htmlFor="">Centro de Custo</label>
-                <select id="centro-custo">
+                <select id="centro_custo">
                   <option value=""> Selecionar</option>
                   <option value="1100109002 - FIN CONTROLES INTERNOS MTZ">
                     1100109002 - FIN CONTROLES INTERNOS MTZ
@@ -156,7 +174,7 @@ export default function SolicitarReembolso() {
               <div className="entradas__inputs">
                 <div className="inputs__despesas">
                   <label htmlFor="">Ord. Int.</label>
-                  <input id="ordem-interna" type="number" />
+                  <input id="ordem_interna" type="number" />
                 </div>
 
                 <div className="inputs__despesas">
@@ -181,22 +199,22 @@ export default function SolicitarReembolso() {
 
                 <div className="inputs__despesas">
                   <label htmlFor="">Dist/KM</label>
-                  <input id="dist-km" type="number" />
+                  <input id="distancia_km" type="number" />
                 </div>
 
                 <div className="inputs__despesas">
                   <label htmlFor="">Valor/KM</label>
-                  <input id="valor-km" type="number" />
+                  <input id="valor_km" type="number" />
                 </div>
 
                 <div className="inputs__despesas">
                   <label htmlFor="">Val. Fat.</label>
-                  <input id="valor-faturado" type="number" />
+                  <input id="valor_faturado" type="number" />
                 </div>
 
                 <div className="inputs__despesas">
                   <label htmlFor="">Despesa</label>
-                  <input id="valor-despesa" type="number" />
+                  <input id="valor_despesa" type="number" />
                 </div>
               </div>
 
@@ -239,21 +257,21 @@ export default function SolicitarReembolso() {
             <tbody>
               {tableData.map((row, index) => (
                 <tr key={index}>
-                  <td>{row.nome}</td>
+                  <td>{row.colaborador}</td>
                   <td>{row.empresa}</td>
-                  <td>{row.prestacao}</td>
-                  <td>{row.motivo}</td>
+                  <td>{row.num_prestacao}</td>
+                  <td>{row.descricao}</td>
                   <td>{row.data}</td>
-                  <td>{row.tipoDespesa}</td>
-                  <td>{row.centroCusto}</td>
-                  <td>{row.ordemInterna}</td>
+                  <td>{row.tipo_reembolso}</td>
+                  <td>{row.centro_custo}</td>
+                  <td>{row.ordem_interna}</td>
                   <td>{row.divisao}</td>
                   <td>{row.pep}</td>
                   <td>{row.moeda}</td>
-                  <td>{row.distKm}</td>
-                  <td>{row.valorKm}</td>
-                  <td>{row.valorFaturado}</td>
-                  <td>{row.valorDespesa}</td>
+                  <td>{row.distancia_km}</td>
+                  <td>{row.valor_km}</td>
+                  <td>{row.valor_faturado}</td>
+                  <td>{row.despesa}</td>
                 </tr>
               ))}
             </tbody>
@@ -273,7 +291,7 @@ export default function SolicitarReembolso() {
             </div>
           </div>
           <div className="footer__buttons">
-            <button className="btn-enviar">✔ Enviar para Análise</button>
+            <button className="btn-enviar" onClick={handleEnviarParaAnalise}>✔ Enviar para Análise</button>
             <button className="btn-cancelar">✖ Cancelar Solicitação</button>
           </div>
         </div>
