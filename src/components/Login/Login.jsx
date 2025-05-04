@@ -2,48 +2,32 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginStyles.scss';
 import ImgPrincipal from '../../images/img-initial.png';
+import api from '../../Api/Api';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
 
   const navigate = useNavigate();
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const validatePassword = (password) => {
-    return password.length >= 8;
-  };
-
-  const handleLogin = () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     let valid = true;
 
-    if (!validateEmail(email)) {
-      setEmailError(true);
-      setErrorMessage('Email inválido.');
-      valid = false;
-    } else {
-      setEmailError(false);
-    }
-
-    if (!validatePassword(password)) {
-      setPasswordError(true);
-      setErrorMessage('Senha inválida. Deve conter pelo menos 8 caracteres.');
-      valid = false;
-    } else {
-      setPasswordError(false);
-    }
-
-    if (valid) {
-      setErrorMessage('');
-      // Aqui você pode redirecionar para a página de reembolsos
-      navigate('/reembolsos');
+    try {
+      const resposta = await api.post('/colaborador/login', {
+        email: email,
+        senha: password,
+      });
+      if (valid) {
+        console.log(resposta.data);
+        alert('Login realizado com sucesso!');
+        // Aqui você pode redirecionar para a página de reembolsos
+        navigate('/reembolsos');
+      }
+    } catch (error) {
+      console.log('Erro ao fazer login: ', error);
+      alert('Erro no login aqui ó!');
     }
   };
 
@@ -73,7 +57,6 @@ export default function Login() {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className={emailError ? 'error' : ''}
               required
             />
             <input
@@ -81,11 +64,9 @@ export default function Login() {
               placeholder="Senha"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className={passwordError ? 'error' : ''}
               required
             />
             <a href="#">Esqueci minha senha</a>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
           </form>
 
           <div className="btns__login">
